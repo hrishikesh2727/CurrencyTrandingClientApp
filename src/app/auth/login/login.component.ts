@@ -12,6 +12,7 @@ import {LoginService} from '../login/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginSubmitError:string;
   loginForm: FormGroup;
   user : User = new User();
   constructor(private loginService: LoginService) {}
@@ -32,13 +33,15 @@ export class LoginComponent implements OnInit {
     this.loginService.loginValidation<JwtToken>(this.user).subscribe(
       results => {
       sessionStorage.setItem('username',this.user.username);
-         let tokenStr= 'Bearer '+results.token;
+         let tokenStr= 'Bearer '+results.jwt;
          sessionStorage.setItem('token', tokenStr);
-         console.log(tokenStr);
+         this.loginSubmitError = "log in successfully.";
+         
       }
       , 
-      error => 
-      console.log(error+":error")
+      error => {
+      this.loginSubmitError = "User login failed.";
+      }
       );
   }
 }

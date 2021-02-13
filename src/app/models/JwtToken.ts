@@ -1,12 +1,12 @@
 export class JwtToken {
     constructor
     (
-      token?: string
+      jwt?: string
      )
      {
-        this.token = token;
+        this.jwt = jwt;
      }
-     public token: string;     
+     public jwt: string;     
 }
 
 export class CurrencyApi {
