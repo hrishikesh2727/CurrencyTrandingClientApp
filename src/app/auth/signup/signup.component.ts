@@ -6,6 +6,8 @@ import { AuthService } from '../auth.service';
 import { User } from 'src/app/models/user';
 import { SignupService } from '../../services/signup.service';
 import { AlertService } from '../../services/alert.service';
+import { LoginService } from '../../services/login.service';
+import { JwtToken } from 'src/app/models/JwtToken';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +17,7 @@ import { AlertService } from '../../services/alert.service';
 export class SignupComponent implements OnInit {
   maxDate;
   user : User = new User();
-  constructor(private authService: AuthService,private alertService: AlertService,private signupService :SignupService) { }
+  constructor(private authService: AuthService,private alertService: AlertService,private signupService :SignupService,private loginService: LoginService ) { }
 
   ngOnInit() {
     this.maxDate = new Date();
@@ -32,7 +34,7 @@ export class SignupComponent implements OnInit {
     this.user.active = "true";
     this.signupService.SignUpUser<User>(this.user).subscribe(
       results => {        
-        this.alertService.openSnackBar("User registered successfully","Done");        
+        this.alertService.openSnackBar("User registered successfully","Done");
         this.authService.registerUser();
       }, 
       error => {

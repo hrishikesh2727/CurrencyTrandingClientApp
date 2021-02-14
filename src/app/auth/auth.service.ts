@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private router: Router) {}
 
   registerUser() {    
-    this.logout();
+    this.authSuccessfully();
   }
 
   

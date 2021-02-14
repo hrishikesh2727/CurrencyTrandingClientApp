@@ -11,7 +11,7 @@ import { ConfigurationService } from './UserConfiguration.service';
   providedIn: 'root'
 })
 export class SignupEndpointService extends EndpointBase  {
-  private readonly _signUpUrl: string = '/addUser';
+  private readonly _signUpUrl: string = '/signup';
 
   get signUpUrl() { return this.configurations.baseUrl + this._signUpUrl; }
 
