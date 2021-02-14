@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { CurrencyApi, JwtToken } from 'src/app/models/JwtToken';
 import { LoginEndpointService } from './login-endpoint.service';
 
 @Injectable({

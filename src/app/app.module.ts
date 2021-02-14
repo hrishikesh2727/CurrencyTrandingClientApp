@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastaModule } from 'ngx-toasta';
 import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CurrencyTradingComponent } from './currency-trading/currency-trading.component';
 
 
 
@@ -34,6 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
+    CurrencyTradingComponent,
   ],
   imports: [
     HttpClientModule,

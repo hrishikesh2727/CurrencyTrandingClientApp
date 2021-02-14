@@ -1,0 +1,29 @@
+<section>
+    <mat-card>
+        <form  (ngSubmit)="onCurrencyBooking(f)"
+            #f="ngForm">
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <mat-form-field appearance="fill">
+                <mat-label>Forex</mat-label>
+                <mat-select ngModel name="currency" required>
+                    <mat-option *ngFor="let currency of currencylist" [value]="currency.currencyCode">
+                        {{currency.currencyName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Position" ngModel name="position" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Unit" ngModel name="totalAmount" required>
+            </mat-form-field>
+           
+            <button mat-raised-button color="accent">Buy</button>
+            <button mat-raised-button color="warn">Sell</button>
+        </div>
+            <mat-card-actions fxLayout="center" fxLayoutAlign="center center">
+                <button mat-flat-button color="primary" type="submit">Submit</button>
+            </mat-card-actions>
+        </form>
+
+    </mat-card>
+</section>

@@ -7,7 +7,6 @@ import { User } from 'src/app/models/user';
 import { SignupService } from '../../services/signup.service';
 import { AlertService } from '../../services/alert.service';
 import { LoginService } from '../../services/login.service';
-import { JwtToken } from 'src/app/models/JwtToken';
 
 @Component({
   selector: 'app-signup',

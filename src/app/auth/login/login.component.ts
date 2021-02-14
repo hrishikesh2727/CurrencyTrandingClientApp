@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { JwtToken } from 'src/app/models/JwtToken';
+import { JwtToken } from 'src/app/models/jwttoken';
 import { User } from 'src/app/models/user';
 
 import { AuthService } from '../auth.service';
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginSubmitError: string;
   loginForm: FormGroup;
   user: User = new User();
-  constructor(private loginService: LoginService, private alertService: AlertService) { }
+  constructor(private loginService: LoginService, private alertService: AlertService, private authService:AuthService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('currency-trading:username', this.user.userName);
         sessionStorage.setItem('currency-trading:token', results.jwt);
         this.alertService.openSnackBar("log in successfully.", "Done");
+        this.authService.registerUser();
       },
       error => {
         this.alertService.openSnackBar("User login failed.", "Error");
