@@ -13,12 +13,21 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
-  registerUser(authData: AuthData) {    
-    this.authSuccessfully();
+  registerUser() {    
+    this.logout();
   }
 
   
-  login(authData: AuthData) {
+  login(authData: AuthData) {    
+    this.user = {
+      email: authData.email,
+      active: null,
+      birthday: null,
+      firstName: null,
+      lastName: null,
+      password: null,
+      userName : authData.email
+    };
     this.authSuccessfully();
   }
 
@@ -36,8 +45,8 @@ export class AuthService {
     return this.user != null;
   }
 
-  get accessToken(): string {
-    return null;
+  get accessToken(): string {    
+    return sessionStorage.getItem('currency-trading:token');
   }
 
   private authSuccessfully() {

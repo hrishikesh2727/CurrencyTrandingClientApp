@@ -6,7 +6,8 @@ import { User } from 'src/app/models/user';
 
 import { EndpointBase } from 'src/app/services/endpoint-base.service';
 import { ConfigurationService } from 'src/app/services/UserConfiguration.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth/auth.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class LoginEndpointService extends EndpointBase  {
   }
   
   getValidUserTokenEndpoint<T>(user: User): Observable<T> { 
-    let username = user.username;
+    let username = user.userName;
     let password = user.password; 
     return this.http.post<T>(this.getValidUserUrl, {username,password}, this.loginRequestHeaders).pipe<T>(
       catchError(error => {

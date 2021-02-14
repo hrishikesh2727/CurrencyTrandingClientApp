@@ -13,11 +13,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { AuthService } from './auth/auth.service';
-import { LoginService } from './auth/login/login.service';
-import { LoginEndpointService } from './auth/login/login-endpoint.service';
 import { EndpointBase } from './services/endpoint-base.service';
 import { ConfigurationService } from './services/UserConfiguration.service';
+import { LoginService } from './services/login.service';
+import { LoginEndpointService } from './services/login-endpoint.service';
+import { SignupService } from './services/signup.service';
+import { SignupEndpointService } from './services/signup-endpoint.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastaModule } from 'ngx-toasta';
+import { AlertService } from './services/alert.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 @NgModule({
@@ -37,13 +43,19 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
-  providers: [AuthService,
+  providers: [
+    AuthService,
     LoginService,
-  LoginEndpointService,
-EndpointBase,
-ConfigurationService ],
+    LoginEndpointService,
+    SignupService,
+    SignupEndpointService,
+    EndpointBase,
+    ConfigurationService,
+    AlertService
+  ],
   bootstrap: [AppComponent],
   entryComponents: []
 })

@@ -4,7 +4,8 @@ import { JwtToken } from 'src/app/models/JwtToken';
 import { User } from 'src/app/models/user';
 
 import { AuthService } from '../auth.service';
-import {LoginService} from '../login/login.service';
+import { LoginService } from '../../services/login.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,10 @@ import {LoginService} from '../login/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginSubmitError:string;
+  loginSubmitError: string;
   loginForm: FormGroup;
-  user : User = new User();
-  constructor(private loginService: LoginService) {}
+  user: User = new User();
+  constructor(private loginService: LoginService, private alertService: AlertService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -28,20 +29,17 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    this.user.username = this.loginForm.value.email;
+    this.user.userName = this.loginForm.value.email;
     this.user.password = this.loginForm.value.password;
     this.loginService.loginValidation<JwtToken>(this.user).subscribe(
       results => {
-      sessionStorage.setItem('username',this.user.username);
-         let tokenStr= 'Bearer '+results.jwt;
-         sessionStorage.setItem('token', tokenStr);
-         this.loginSubmitError = "log in successfully.";
-         
-      }
-      , 
+        sessionStorage.setItem('currency-trading:username', this.user.userName);
+        sessionStorage.setItem('currency-trading:token', results.jwt);
+        this.alertService.openSnackBar("log in successfully.", "Done");
+      },
       error => {
-      this.loginSubmitError = "User login failed.";
+        this.alertService.openSnackBar("User login failed.", "Error");
       }
-      );
+    );
   }
 }

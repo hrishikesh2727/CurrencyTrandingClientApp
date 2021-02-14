@@ -22,7 +22,9 @@
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
+    "@material/snackbar": "^10.0.0",
     "hammerjs": "^2.0.8",
+    "ngx-toasta": "^1.0.3",
     "rxjs": "^6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
