@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
     this.signupService.SignUpUser<User>(this.user).subscribe(
       results => {        
         this.alertService.openSnackBar("User registered successfully","Done");
-        this.authService.registerUser();
+        this.authService.registerUser(this.user);
       }, 
       error => {
         this.alertService.openSnackBar("Unable to save.","Error"); 

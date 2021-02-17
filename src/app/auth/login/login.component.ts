@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('currency-trading:username', this.user.userName);
         sessionStorage.setItem('currency-trading:token', results.jwt);
         this.alertService.openSnackBar("log in successfully.", "Done");
-        this.authService.registerUser();
+        this.authService.registerUser(this.user);
       },
       error => {
         this.alertService.openSnackBar("User login failed.", "Error");

@@ -11,14 +11,15 @@ export class AuthService {
   authChange = new Subject<boolean>();
   private user: User = new User();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  registerUser() {    
+  registerUser(user: User) {
+    this.user = user;
     this.authSuccessfully();
   }
 
-  
-  login(authData: AuthData) {    
+
+  login(authData: AuthData) {
     this.user = {
       email: authData.email,
       active: null,
@@ -26,7 +27,7 @@ export class AuthService {
       firstName: null,
       lastName: null,
       password: null,
-      userName : authData.email
+      userName: authData.email
     };
     this.authSuccessfully();
   }
@@ -45,7 +46,7 @@ export class AuthService {
     return this.user != null;
   }
 
-  get accessToken(): string {    
+  get accessToken(): string {
     return sessionStorage.getItem('currency-trading:token');
   }
 
