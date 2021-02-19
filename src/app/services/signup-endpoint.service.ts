@@ -20,7 +20,7 @@ export class SignupEndpointService extends EndpointBase  {
   }
   
   signUpEndpoint<T>(user: User): Observable<T> { 
-    return this.http.post<T>(this.signUpUrl, JSON.stringify(user), this.requestHeaders).pipe<T>(
+    return this.http.post<T>(this.signUpUrl, JSON.stringify(user), this.loginRequestHeaders).pipe<T>(
       catchError(error => {
         return this.handleError(error, () => this.signUpEndpoint(user));        
       }));
