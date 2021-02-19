@@ -14,8 +14,7 @@ export class AuthService {
   constructor(private router: Router) { }
 
   registerUser(user: User) {
-    this.user = user;
-    this.authSuccessfully();
+    this.logout();
   }
 
 
@@ -32,7 +31,8 @@ export class AuthService {
     this.authSuccessfully();
   }
 
-  logout() {
+  logout() {    
+    this.setAccessToken = null;
     this.user = null;
     this.authChange.next(false);
     this.router.navigate(['/login']);
@@ -48,6 +48,10 @@ export class AuthService {
 
   get accessToken(): string {
     return sessionStorage.getItem('currency-trading:token');
+  }
+
+  set setAccessToken(tokenValue : any) {
+     sessionStorage.setItem('currency-trading:token',tokenValue);
   }
 
   private authSuccessfully() {
