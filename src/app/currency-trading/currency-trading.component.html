@@ -1,25 +1,48 @@
 <section>
     <mat-card>
-        <form  (ngSubmit)="onCurrencyBooking(f)"
-            #f="ngForm">
+        <form (ngSubmit)="onCurrencyBooking(f)" #f="ngForm">
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-            <mat-form-field appearance="fill">
-                <mat-label>Forex</mat-label>
-                <mat-select ngModel name="currency" required>
-                    <mat-option *ngFor="let currency of currencylist" [value]="currency.currencyCode">
-                        {{currency.currencyName}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <input type="text" matInput placeholder="Position" ngModel name="position" required>
-            </mat-form-field>
-            <mat-form-field>
-                <input type="text" matInput placeholder="Unit" ngModel name="totalAmount" required>
-            </mat-form-field>
-           
-            <button mat-raised-button color="accent">Buy</button>
-            <button mat-raised-button color="warn">Sell</button>
-        </div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Forex</mat-label>
+                    <mat-select ngModel name="currency" (change)="onChangeCurrency($event)" required>
+                        <mat-option *ngFor="let currency of currencylist" [value]="currency.currencyCode">
+                            {{currency.currencyName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Currency Rate" ngModel name="currencyRate"
+                        [(ngModel)]="orderBook.currencyRate" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Position" ngModel name="position"
+                        [(ngModel)]="orderBook.position" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Unit" ngModel name="unit" [(ngModel)]="orderBook.unit"
+                        required>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Total Amount" ngModel name="totalAmount"
+                        [(ngModel)]="orderBook.totalAmount" disabled>
+                </mat-form-field>
+
+
+                <mat-button-toggle-group>
+                    <mat-button-toggle value="action-buy"><button mat-raised-button color="accent" id="action-buy"
+                            (click)="onOrderActionChange($event)">Buy</button>
+                    </mat-button-toggle>
+                    <mat-button-toggle value="action-cell"><button mat-raised-button color="warn" id="action-cell"
+                            (click)="onOrderActionChange($event)">Sell</button>
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+
+            </div>
+            <br />
+            <div fxLayout="center" fxLayoutAlign="center center">
+                <p class="text-success">(Currenct Rate - Postion) * Unit = {{totalAmount}}</p>
+            </div>
+            <br />
             <mat-card-actions fxLayout="center" fxLayoutAlign="center center">
                 <button mat-flat-button color="primary" type="submit">Submit</button>
             </mat-card-actions>

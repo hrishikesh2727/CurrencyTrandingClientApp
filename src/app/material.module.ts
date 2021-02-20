@@ -17,6 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatDialogModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonToggleModule
   ],
   exports: [
     MatButtonModule,
@@ -57,7 +59,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatDialogModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonToggleModule
   ]
 })
 export class MaterialModule {}
