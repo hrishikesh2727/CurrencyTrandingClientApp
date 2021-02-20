@@ -20,11 +20,10 @@ import { LoginEndpointService } from './services/login-endpoint.service';
 import { SignupService } from './services/signup.service';
 import { SignupEndpointService } from './services/signup-endpoint.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastaModule } from 'ngx-toasta';
 import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CurrencyTradingComponent } from './currency-trading/currency-trading.component';
-
+import { FooterComponent } from '../app/navigation/footer/footer.component';
 
 
 @NgModule({
@@ -36,6 +35,7 @@ import { CurrencyTradingComponent } from './currency-trading/currency-trading.co
     HeaderComponent,
     SidenavListComponent,
     CurrencyTradingComponent,
+    FooterComponent,
   ],
   imports: [
     HttpClientModule,
