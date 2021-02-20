@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyTradingService } from '../services/currency-trading.service';
 import { Currency } from '../models/currency';
+import { OrderBook } from '../models/order-book';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -11,6 +12,8 @@ import { NgForm } from '@angular/forms';
 export class CurrencyTradingComponent implements OnInit {
 
   currencylist: Currency[];
+  orderBook: OrderBook = new OrderBook();
+  totalAmount:number;
 
   constructor(private currencyTradingService: CurrencyTradingService) { }
 
@@ -29,8 +32,23 @@ export class CurrencyTradingComponent implements OnInit {
     );
   }
 
-  onCurrencyBooking(form: NgForm){
-    
+  onCurrencyBooking(form: NgForm) {
+
+  }
+
+  onOrderActionChange(event: any) {
+    if (event.target.innerText == "Buy") {     
+      this.orderBook.orderAction = "Buy";
+      this.totalAmount = (Number(this.orderBook.position) - Number(this.orderBook.currencyRate)) * Number(this.orderBook.unit);
+    }
+    else {
+      this.orderBook.orderAction = "Sell";
+    }
+  }
+
+  onChangeCurrency(event: any) {
+    debugger;
+    //this.orderBook.currencyName = 
   }
 
 }
