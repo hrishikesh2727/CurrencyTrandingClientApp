@@ -11,6 +11,9 @@
       <mat-hint>Please enter your password.</mat-hint>
       <mat-error>Missing password.</mat-error>
     </mat-form-field>
+    <br />
+    <a [routerLink]="['/reset-password']">Reset Password</a>
     <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
   </form>
+  <br />  
 </section>
