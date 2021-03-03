@@ -6,7 +6,8 @@ export class OrderBook {
         position?: string,
         unit?: string,
         totalAmount?: string,
-        orderAction?: string
+        orderAction?: string,
+        endAction?:string
      )
      {
         this.currencyName = currencyName;
@@ -15,6 +16,7 @@ export class OrderBook {
         this.unit = unit;
         this.totalAmount = totalAmount;
         this.orderAction = orderAction;  
+        this.endAction = endAction;
      }
      public currencyName: string;
      public currentRate: string;
@@ -23,4 +25,5 @@ export class OrderBook {
      public unit: string;
      public totalAmount:string;
      public orderAction: string;
+     public endAction:string;
 }
