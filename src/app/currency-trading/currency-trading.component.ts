@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CurrencyTradingService } from '../services/currency-trading.service';
 import { Currency } from '../models/currency';
 import { OrderBook } from '../models/order-book';
@@ -6,13 +6,15 @@ import { NgForm } from '@angular/forms';
 import { AlertService } from '../services/alert.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { UiService } from '../services/ui.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-currency-trading',
   templateUrl: './currency-trading.component.html',
   styleUrls: ['./currency-trading.component.css']
 })
-export class CurrencyTradingComponent implements OnInit,AfterViewInit {
+export class CurrencyTradingComponent implements OnInit,AfterViewInit,OnDestroy {
 
   currencylist: Currency[];
   orderBook: OrderBook = new OrderBook();
@@ -21,14 +23,18 @@ export class CurrencyTradingComponent implements OnInit,AfterViewInit {
   orderBookList : OrderBook[];
   displayedColumns = ['currencyName','currentRate','position','unit','totalAmount','endAction','orderAction'];
   dataSource = new MatTableDataSource<OrderBook>();
-
+  isLoading:boolean;
+  private loadingSubs : Subscription;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private currencyTradingService: CurrencyTradingService,private alertService: AlertService) { }
+  constructor(private currencyTradingService: CurrencyTradingService,private alertService: AlertService, private uiService : UiService) { }
 
   ngOnInit(): void {
     this.getAllCurrency();
     this.getOrderBook();
+    this.loadingSubs = this.uiService.loadingStageChanged.subscribe(isLoading=>{
+      this.isLoading = isLoading;
+    });
   }
 
   ngAfterViewInit(){
@@ -48,14 +54,17 @@ export class CurrencyTradingComponent implements OnInit,AfterViewInit {
 
   onCurrencyBooking(form: NgForm) {
     if(form.valid){
+      this.uiService.showProgressBar();
       this.currencyTradingService.addOrderBook<OrderBook>(this.orderBook).subscribe(
         result => {
           this.alertService.openSnackBar("Order is booked","Done");
           this.orderBook = new OrderBook();
           form.resetForm();
+          this.uiService.hideProgressBar();
         },
         error => {
           this.alertService.openSnackBar("Unable to save","Error");
+          this.uiService.hideProgressBar();
         }
       );
     }
@@ -95,6 +104,10 @@ export class CurrencyTradingComponent implements OnInit,AfterViewInit {
     else {
       this.orderBook.orderAction = "Sell";
     }
+  }
+
+  ngOnDestroy(){
+    this.loadingSubs.unsubscribe();
   }
  
 }

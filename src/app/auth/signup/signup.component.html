@@ -1,4 +1,5 @@
 <section class="signup-form">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
     <mat-form-field>
       <input type="text" matInput placeholder="First Name" ngModel name="firstName" required #firstnameInput="ngModel">

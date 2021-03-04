@@ -25,6 +25,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CurrencyTradingComponent } from './currency-trading/currency-trading.component';
 import { FooterComponent } from '../app/navigation/footer/footer.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { UiService } from './services/ui.service';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     SignupEndpointService,
     EndpointBase,
     ConfigurationService,
-    AlertService
+    AlertService,
+    UiService
   ],
   bootstrap: [AppComponent],
   entryComponents: []
