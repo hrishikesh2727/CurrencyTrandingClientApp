@@ -14,30 +14,30 @@ import { Subscription } from 'rxjs';
   templateUrl: './currency-trading.component.html',
   styleUrls: ['./currency-trading.component.css']
 })
-export class CurrencyTradingComponent implements OnInit,AfterViewInit,OnDestroy {
+export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   currencylist: Currency[];
   orderBook: OrderBook = new OrderBook();
-  totalAmount:number=0;
-  isProfit : boolean;
-  orderBookList : OrderBook[];
-  displayedColumns = ['currencyName','currentRate','position','unit','totalAmount','endAction','orderAction'];
+  totalAmount: number = 0;
+  isProfit: boolean;
+  orderBookList: OrderBook[];
+  displayedColumns = ['currencyName', 'currentRate', 'position', 'unit', 'totalAmount', 'endAction', 'orderAction'];
   dataSource = new MatTableDataSource<OrderBook>();
-  isLoading:boolean;
-  private loadingSubs : Subscription;
+  isLoading: boolean;
+  private loadingSubs: Subscription;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private currencyTradingService: CurrencyTradingService,private alertService: AlertService, private uiService : UiService) { }
+  constructor(private currencyTradingService: CurrencyTradingService, private alertService: AlertService, private uiService: UiService) { }
 
   ngOnInit(): void {
     this.getAllCurrency();
     this.getOrderBook();
-    this.loadingSubs = this.uiService.loadingStageChanged.subscribe(isLoading=>{
+    this.loadingSubs = this.uiService.loadingStageChanged.subscribe(isLoading => {
       this.isLoading = isLoading;
     });
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
@@ -47,58 +47,58 @@ export class CurrencyTradingComponent implements OnInit,AfterViewInit,OnDestroy 
         this.currencylist = result;
       },
       error => {
-        this.alertService.openSnackBar("Data is not present","Error");
+        this.alertService.openSnackBar("Data is not present", "Error");
       }
     );
   }
 
   onCurrencyBooking(form: NgForm) {
-    if(form.valid){
+    if (form.valid) {
       this.uiService.showProgressBar();
       this.currencyTradingService.addOrderBook<OrderBook>(this.orderBook).subscribe(
         result => {
-          this.alertService.openSnackBar("Order is booked","Done");
+          this.alertService.openSnackBar("Order is booked", "Done");
           this.orderBook = new OrderBook();
           form.resetForm();
           this.uiService.hideProgressBar();
         },
         error => {
-          this.alertService.openSnackBar("Unable to save","Error");
+          this.alertService.openSnackBar("Unable to save", "Error");
           this.uiService.hideProgressBar();
         }
       );
     }
-    else{
-      this.alertService.openSnackBar("Please enter the require details","Error");
+    else {
+      this.alertService.openSnackBar("Please enter the require details", "Error");
     }
   }
 
-  getOrderBook() {    
-      this.currencyTradingService.getOrderBook<OrderBook[]>().subscribe(
-        result => {
-          this.orderBookList = result;
-          this.dataSource.data = result;
-        },
-        error => {
-          this.alertService.openSnackBar("Unable to load the Orders","Error");
-        }
-      );    
+  getOrderBook() {
+    this.currencyTradingService.getOrderBook<OrderBook[]>().subscribe(
+      result => {
+        this.orderBookList = result;
+        this.dataSource.data = result;
+      },
+      error => {
+        this.alertService.openSnackBar("Unable to load the Orders", "Error");
+      }
+    );
   }
 
   onOrderActionChange(event: any) {
-    if (event.target.innerText == "Buy") {     
+    if (event.target.innerText == "Buy") {
       this.orderBook.orderAction = "Buy";
-      this.totalAmount = (Number(this.orderBook.position) - Number(this.orderBook.currencyRate)) * Number(this.orderBook.unit);      
-      if(this.totalAmount >= 0){
+      this.totalAmount = (Number(this.orderBook.position) - Number(this.orderBook.currencyRate)) * Number(this.orderBook.unit);
+      if (this.totalAmount >= 0) {
         this.isProfit = true;
-        this.orderBook.endAction ="Profit";
+        this.orderBook.endAction = "Profit";
       }
-      else{
+      else {
         this.isProfit = false;
         this.totalAmount = -this.totalAmount;
-        this.orderBook.endAction ="Loss";
+        this.orderBook.endAction = "Loss";
       }
-       
+
       this.orderBook.totalAmount = String(this.totalAmount);
     }
     else {
@@ -106,8 +106,8 @@ export class CurrencyTradingComponent implements OnInit,AfterViewInit,OnDestroy 
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.loadingSubs.unsubscribe();
   }
- 
+
 }

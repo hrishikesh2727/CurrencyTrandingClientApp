@@ -11,7 +11,11 @@ export class CurrencyTradingService {
 
   getAllCurrency<T>() {    
     return this.currencyTradingEndpointService.getAllCurrencyEndpoint<T>();
-  }  
+  }
+
+  getLiveAllCurrency<T>() {    
+    return this.currencyTradingEndpointService.getLiveAllCurrencyEndpoint<T>();
+  }
 
   addOrderBook<T>(orderBook: OrderBook) {    
     return this.currencyTradingEndpointService.addOrderBookEndpoint<T>(orderBook);

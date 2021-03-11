@@ -26,6 +26,7 @@ import { CurrencyTradingComponent } from './currency-trading/currency-trading.co
 import { FooterComponent } from '../app/navigation/footer/footer.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { UiService } from './services/ui.service';
+import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { UiService } from './services/ui.service';
     CurrencyTradingComponent,
     FooterComponent,
     ResetPasswordComponent,
+    CurrencyConverterComponent,
   ],
   imports: [
     HttpClientModule,

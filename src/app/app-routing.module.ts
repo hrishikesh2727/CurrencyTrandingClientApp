@@ -7,13 +7,15 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { CurrencyTradingComponent } from './currency-trading/currency-trading.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'reset-password', component: ResetPasswordComponent},
-  { path: 'currency-trading', component: CurrencyTradingComponent, canActivate: [AuthGuard] }  
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'currency-trading', component: CurrencyTradingComponent, canActivate: [AuthGuard] },
+  { path: 'currency-converter', component: CurrencyConverterComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -21,4 +23,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
