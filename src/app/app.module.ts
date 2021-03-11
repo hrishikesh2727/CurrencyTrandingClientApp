@@ -24,6 +24,9 @@ import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CurrencyTradingComponent } from './currency-trading/currency-trading.component';
 import { FooterComponent } from '../app/navigation/footer/footer.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { UiService } from './services/ui.service';
+import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 
 
 @NgModule({
@@ -36,6 +39,8 @@ import { FooterComponent } from '../app/navigation/footer/footer.component';
     SidenavListComponent,
     CurrencyTradingComponent,
     FooterComponent,
+    ResetPasswordComponent,
+    CurrencyConverterComponent,
   ],
   imports: [
     HttpClientModule,
@@ -56,7 +61,8 @@ import { FooterComponent } from '../app/navigation/footer/footer.component';
     SignupEndpointService,
     EndpointBase,
     ConfigurationService,
-    AlertService
+    AlertService,
+    UiService
   ],
   bootstrap: [AppComponent],
   entryComponents: []
