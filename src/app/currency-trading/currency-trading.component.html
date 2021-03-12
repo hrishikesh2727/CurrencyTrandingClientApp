@@ -1,5 +1,5 @@
 <section>
-    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="accent"></mat-progress-bar>
     <mat-card>
         <form (ngSubmit)="onCurrencyBooking(f,$event,'submit')" #f="ngForm">
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
@@ -12,14 +12,14 @@
                 </mat-form-field>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Currency Rate" ngModel name="currentRate"
-                        [(ngModel)]="orderBook.currentRate" required>
+                        [(ngModel)]="orderBook.currentRate" type="number" required>
                 </mat-form-field>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Position" ngModel name="position"
-                        [(ngModel)]="orderBook.position" required>
+                        [(ngModel)]="orderBook.position" type="number" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input type="text" matInput placeholder="Unit" ngModel name="unit" [(ngModel)]="orderBook.unit"
+                    <input type="text" matInput placeholder="Unit" type="number" ngModel name="unit" [(ngModel)]="orderBook.unit"
                         required>
                 </mat-form-field>
 

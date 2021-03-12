@@ -80,8 +80,10 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   getOrderBook() {
+    this.uiService.showProgressBar();
     this.currencyTradingService.getOrderBook<OrderBook[]>().subscribe(
       result => {
+        this.uiService.hideProgressBar();
         this.orderBookList = result;
         this.dataSource.data = result;
         this.alertService.openSnackBar("Last orders loaded", "Done");

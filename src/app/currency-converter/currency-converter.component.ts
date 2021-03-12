@@ -32,6 +32,7 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
   }
 
   getAllCurrency() {
+    this.uiService.showProgressBar();
     this.currencyTradingService.getAllCurrency<Currency[]>().subscribe(
       result => {
         this.lCurrency = new Currency();
@@ -43,6 +44,7 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
         cList.push(this.lCurrency);
         this.currencylist = cList;
         this.liveCurrencylist = result;
+        this.uiService.hideProgressBar();
       },
       error => {
         this.alertService.openSnackBar("Data is not present", "Error");
