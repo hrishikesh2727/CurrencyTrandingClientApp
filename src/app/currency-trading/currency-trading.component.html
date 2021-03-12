@@ -12,14 +12,14 @@
                 </mat-form-field>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Currency Rate" ngModel name="currentRate"
-                        [(ngModel)]="orderBook.currentRate" type="number" required>
+                        [(ngModel)]="orderBook.currentRate" type="number" min="0" required>
                 </mat-form-field>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Position" ngModel name="position"
-                        [(ngModel)]="orderBook.position" type="number" required>
+                        [(ngModel)]="orderBook.position" type="number" min="0" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input type="text" matInput placeholder="Unit" type="number" ngModel name="unit" [(ngModel)]="orderBook.unit"
+                    <input type="text" matInput placeholder="Unit" type="number" min="0" ngModel name="unit" [(ngModel)]="orderBook.unit"
                         required>
                 </mat-form-field>
 

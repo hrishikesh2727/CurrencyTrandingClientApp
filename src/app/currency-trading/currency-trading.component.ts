@@ -44,6 +44,9 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
   getAllCurrency() {
     this.currencyTradingService.getAllCurrency<Currency[]>().subscribe(
       result => {
+        for( let currency of result){
+          currency.currencyName = currency.currencyName + "-"+currency.currencyDescription;
+        }
         this.currencylist = result;
       },
       error => {
