@@ -24,6 +24,9 @@ import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CurrencyTradingComponent } from './currency-trading/currency-trading.component';
 import { FooterComponent } from '../app/navigation/footer/footer.component';
+import { ExchangeChartComponent } from './exchange-chart/exchange-chart.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { CompareChartComponent } from './compare-chart/compare-chart.component';
 
 
 @NgModule({
@@ -36,6 +39,8 @@ import { FooterComponent } from '../app/navigation/footer/footer.component';
     SidenavListComponent,
     CurrencyTradingComponent,
     FooterComponent,
+    ExchangeChartComponent,
+    CompareChartComponent,
   ],
   imports: [
     HttpClientModule,
@@ -46,7 +51,8 @@ import { FooterComponent } from '../app/navigation/footer/footer.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    GoogleChartsModule
   ],
   providers: [
     AuthService,

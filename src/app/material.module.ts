@@ -18,11 +18,13 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   imports: [
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
@@ -44,6 +46,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
   exports: [
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
