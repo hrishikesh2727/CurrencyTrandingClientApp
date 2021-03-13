@@ -27,6 +27,10 @@ import { FooterComponent } from '../app/navigation/footer/footer.component';
 import { ExchangeChartComponent } from './exchange-chart/exchange-chart.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { CompareChartComponent } from './compare-chart/compare-chart.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { UiService } from './services/ui.service';
+import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
+
 
 
 @NgModule({
@@ -41,6 +45,8 @@ import { CompareChartComponent } from './compare-chart/compare-chart.component';
     FooterComponent,
     ExchangeChartComponent,
     CompareChartComponent,
+    ResetPasswordComponent,
+    CurrencyConverterComponent
   ],
   imports: [
     HttpClientModule,
@@ -62,7 +68,8 @@ import { CompareChartComponent } from './compare-chart/compare-chart.component';
     SignupEndpointService,
     EndpointBase,
     ConfigurationService,
-    AlertService
+    AlertService,
+    UiService
   ],
   bootstrap: [AppComponent],
   entryComponents: []
