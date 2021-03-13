@@ -18,12 +18,15 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   imports: [
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
@@ -46,6 +49,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   exports: [
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,

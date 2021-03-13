@@ -24,6 +24,9 @@ import { AlertService } from './services/alert.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CurrencyTradingComponent } from './currency-trading/currency-trading.component';
 import { FooterComponent } from '../app/navigation/footer/footer.component';
+import { ExchangeChartComponent } from './exchange-chart/exchange-chart.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { CompareChartComponent } from './compare-chart/compare-chart.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { UiService } from './services/ui.service';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
@@ -39,8 +42,10 @@ import { CurrencyConverterComponent } from './currency-converter/currency-conver
     SidenavListComponent,
     CurrencyTradingComponent,
     FooterComponent,
+    ExchangeChartComponent,
+    CompareChartComponent,
     ResetPasswordComponent,
-    CurrencyConverterComponent,
+    CurrencyConverterComponent
   ],
   imports: [
     HttpClientModule,
@@ -51,7 +56,8 @@ import { CurrencyConverterComponent } from './currency-converter/currency-conver
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    GoogleChartsModule
   ],
   providers: [
     AuthService,

@@ -6,6 +6,14 @@
   <a mat-list-item routerLink="/login" (click)="onClose()" *ngIf="!isAuth">
     <mat-icon>input</mat-icon>
     <span class="nav-caption">Login</span>
+  </a>
+  <a mat-list-item routerLink="/currency-converter" (click)="onClose()" *ngIf="isAuth">
+    <mat-icon>attach_money</mat-icon>
+    <span class="nav-caption">Currency Converter</span>
+  </a>
+  <a mat-list-item routerLink="/currency-trading" (click)="onClose()" *ngIf="isAuth">
+    <mat-icon>add_task</mat-icon>
+    <span class="nav-caption">Currency Trading</span>
   </a> 
   <a mat-list-item routerLink="/currency-converter" (click)="onClose()" *ngIf="isAuth">
     <mat-icon>attach_money</mat-icon>
@@ -21,4 +29,48 @@
       <span class="nav-caption">Logout</span>
     </button>
   </mat-list-item>
+  <mat-list-item>
+    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Trading</span>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Portfolio</span>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Order Book</span>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Watch List</span>
+    </button>
+  </mat-list-item>
+  <mat-list-item [matMenuTriggerFor]="menu">
+    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Reports</span>
+    </button>
+  </mat-list-item>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Live Data</button>
+    <button mat-menu-item>Historical Data</button>
+  </mat-menu>
+  <mat-list-item [matMenuTriggerFor]="Chartsmenu">
+    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Charts</span>
+    </button>
+  </mat-list-item>
+  <mat-menu #Chartsmenu="matMenu">
+    <button mat-menu-item>Comparison</button>
+    <button mat-menu-item>Historical Chart</button>
+  </mat-menu>
 </mat-nav-list>
