@@ -18,16 +18,8 @@ export class AuthService {
   }
 
 
-  login(authData: AuthData) {
-    this.user = {
-      email: authData.email,
-      active: null,
-      birthday: null,
-      firstName: null,
-      lastName: null,
-      password: null,
-      userName: authData.email
-    };
+  login(user: User) {    
+    this.user = user;
     this.authSuccessfully();
   }
 
@@ -43,7 +35,12 @@ export class AuthService {
   }
 
   isAuth() {
-    return this.user != null;
+    if(this.user != null && this.user != undefined){
+      if(this.user.userName == undefined){
+        this.user = null;
+      }
+    }
+    return this.user != null && this.user != undefined;
   }
 
   get accessToken(): string {

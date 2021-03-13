@@ -11,10 +11,12 @@ import { ConfigurationService } from './UserConfiguration.service';
   providedIn: 'root'
 })
 export class CurrencyTradingEndpointService extends EndpointBase {
+  private readonly _getLiveAllCurrencyUrl:string ='https://openexchangerates.org/api/currencies.json';
   private readonly _getAllCurrencyUrl: string = '/getAllCurrency';
   private readonly _addOrderBookUrl: string = '/addOrderBook';
   private readonly _getOrderBookUrl: string = '/getAllOrderBook';
 
+  get getLiveAllCurrencyUrl() { return this.configurations.baseUrl + this._getLiveAllCurrencyUrl; }
   get getAllCurrencyUrl() { return this.configurations.baseUrl + this._getAllCurrencyUrl; }
   get addOrderBookUrl() { return this.configurations.baseUrl + this._addOrderBookUrl; }
   get getOrderBookUrl() { return this.configurations.baseUrl + this._getOrderBookUrl; }
@@ -27,6 +29,13 @@ export class CurrencyTradingEndpointService extends EndpointBase {
     return this.http.get<T>(this.getAllCurrencyUrl, this.requestHeaders).pipe<T>(
       catchError(error => {
         return this.handleError(error, () => this.getAllCurrencyEndpoint());        
+      }));
+  }
+
+  getLiveAllCurrencyEndpoint<T>(): Observable<T> { 
+    return this.http.get<T>(this._getLiveAllCurrencyUrl).pipe<T>(
+      catchError(error => {
+        return this.handleError(error, () => this.getLiveAllCurrencyEndpoint());        
       }));
   }
 

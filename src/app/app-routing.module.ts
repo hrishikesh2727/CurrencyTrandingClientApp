@@ -10,7 +10,6 @@ import { CurrencyTradingComponent } from './currency-trading/currency-trading.co
 import { ExchangeChartComponent } from './exchange-chart/exchange-chart.component'
 import { CompareChartComponent } from './compare-chart/compare-chart.component';
 
-
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'signup', component: SignupComponent },

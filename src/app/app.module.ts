@@ -32,7 +32,6 @@ import { UiService } from './services/ui.service';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

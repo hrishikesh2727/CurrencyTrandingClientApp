@@ -12,4 +12,8 @@ export class SignupService {
   SignUpUser<T>(user : User) {    
     return this.signupEndpointService.signUpEndpoint<T>(user);
   }  
+
+  resetUserPassword<T>(user : User) {    
+    return this.signupEndpointService.resetPasswordEndpoint<T>(user);
+  } 
 }

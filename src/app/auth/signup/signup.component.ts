@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 
@@ -8,21 +8,29 @@ import { ResponseEntity } from 'src/app/models/response-entity';
 import { SignupService } from '../../services/signup.service';
 import { AlertService } from '../../services/alert.service';
 import { LoginService } from '../../services/login.service';
+import { UiService } from 'src/app/services/ui.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit,OnDestroy {
   maxDate;
   user : User = new User();
-  constructor(private authService: AuthService,private alertService: AlertService,private signupService :SignupService,private loginService: LoginService ) { }
+  isLoading:boolean;
+  private loadingSubs : Subscription;
+  constructor(private authService: AuthService,private alertService: AlertService,private signupService :SignupService,private loginService: LoginService, private uiService : UiService ) { }
 
   ngOnInit() {
     this.authService.setAccessToken = null;;
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+
+    this.loadingSubs = this.uiService.loadingStageChanged.subscribe(isLoading=>{
+      this.isLoading = isLoading;
+    });
   }
 
   onSubmit(form: NgForm) {
@@ -33,6 +41,7 @@ export class SignupComponent implements OnInit {
     this.user.firstName = form.value.firstName;
     this.user.lastName = form.value.lastName;
     this.user.active = "true";
+    this.uiService.showProgressBar();
     this.signupService.SignUpUser<ResponseEntity>(this.user).subscribe(
       results => {   
         if(results.statusCodeValue == 400)   
@@ -43,11 +52,17 @@ export class SignupComponent implements OnInit {
           this.alertService.openSnackBar("User registered successfully","Done");
           this.authService.registerUser(this.user);
         }
+        this.uiService.hideProgressBar();
       }, 
       error => {
         this.alertService.openSnackBar("Unable to save.","Error"); 
+        this.uiService.hideProgressBar();
       });
 
+  }
+
+  ngOnDestroy(){
+    this.loadingSubs.unsubscribe();
   }
 
 }

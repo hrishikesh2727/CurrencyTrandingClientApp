@@ -1,0 +1,20 @@
+
+.div-height-main{
+  height: 100%;
+}
+
+.bg{ 
+  height:42em; background-size:cover; width:auto;min-height: auto;
+  color: #fff;background-image: url("../assets/image/currencyconverterbg.jpg");  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.main-div{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

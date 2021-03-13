@@ -1,0 +1,57 @@
+<section>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="accent"></mat-progress-bar>
+    <div class="bg">
+        <div class="main-div">
+            <mat-card class="example-card">
+
+
+                <mat-card-content>
+                    <form (ngSubmit)="onCurrencyBooking(f)" #f="ngForm" autocomplete="off">
+                        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Amount" ngModel name="txtAmount"
+                                    [(ngModel)]="currencyConverter.amount" type="number" min="0" required>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>From</mat-label>
+                                <mat-select ngModel name="fromCurrency" [(ngModel)]="currencyConverter.fromCurrency"
+                                    required>
+                                    <mat-option *ngFor="let currency of currencylist"
+                                        [value]="currency.currencyDescription">
+                                        {{currency.currencyName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>To</mat-label>
+                                <mat-select ngModel name="toCurrency" [(ngModel)]="currencyConverter.toCurrency"
+                                    required>
+                                    <mat-option *ngFor="let currency of liveCurrencylist"
+                                        [value]="currency.currencyDescription">
+                                        {{currency.currencyName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-card-actions class="ml-2">
+                                <button mat-flat-button color="primary" type="submit">
+                                    <mat-icon>keyboard_arrow_right</mat-icon>
+                                </button>
+                            </mat-card-actions>
+                        </div>
+                    </form>
+                    <div style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: lightslategrey; font-weight: bold"
+                        fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px" [hidden]="!isCurrencyConvert">
+                        <mat-label>{{f.value.txtAmount}} US Dollar = </mat-label>
+                        <mat-label style="font-size: 20px;color: black;font-weight: bold;">{{totalAmt}}
+                            {{toCurrencyName}}
+                        </mat-label>
+                        <br />
+                        <br />
+                        <mat-label>1 {{fromCurrencyName}} = {{toCurrencyRate}} &nbsp; {{toCurrencyName}}</mat-label>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</section>
