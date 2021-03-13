@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { JwtToken } from 'src/app/models/jwttoken';
 import { User } from 'src/app/models/user';
+import { AuthData } from '../auth-data.model';
 
 import { AuthService } from '../auth.service';
 import { LoginService } from '../../services/login.service';
@@ -15,6 +16,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit,OnDestroy {
+  
   loginSubmitError: string;
   loginForm: FormGroup;
   user: User = new User();
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit,OnDestroy {
         sessionStorage.setItem('currency-trading:username', this.user.userName);
         sessionStorage.setItem('currency-trading:token', results.jwt);
         this.alertService.openSnackBar("log in successfully.", "Done");
+        
         this.authService.login(this.user);
         this.uiService.hideProgressBar();
       },

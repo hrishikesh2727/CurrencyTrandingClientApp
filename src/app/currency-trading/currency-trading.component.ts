@@ -44,6 +44,9 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
   getAllCurrency() {
     this.currencyTradingService.getAllCurrency<Currency[]>().subscribe(
       result => {
+        for( let currency of result){
+          currency.currencyName = currency.currencyName + "-"+currency.currencyDescription;
+        }
         this.currencylist = result;
       },
       error => {
@@ -52,32 +55,41 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
     );
   }
 
-  onCurrencyBooking(form: NgForm) {
-    if (form.valid) {
-      this.uiService.showProgressBar();
-      this.currencyTradingService.addOrderBook<OrderBook>(this.orderBook).subscribe(
-        result => {
-          this.alertService.openSnackBar("Order is booked", "Done");
-          this.orderBook = new OrderBook();
-          form.resetForm();
-          this.uiService.hideProgressBar();
-        },
-        error => {
-          this.alertService.openSnackBar("Unable to save", "Error");
-          this.uiService.hideProgressBar();
-        }
-      );
+  onCurrencyBooking(form: NgForm, event: any, actionType: any) {
+    if (actionType == "submit") {
+      if (form.valid) {
+        this.uiService.showProgressBar();
+        this.currencyTradingService.addOrderBook<OrderBook>(this.orderBook).subscribe(
+          result => {
+            this.alertService.openSnackBar("Order is booked", "Done");
+            this.orderBook = new OrderBook();
+            form.resetForm();
+            this.uiService.hideProgressBar();
+            this.getOrderBook();
+          },
+          error => {
+            this.alertService.openSnackBar("Unable to save", "Error");
+            this.uiService.hideProgressBar();
+          }
+        );
+      }
+      else {
+        this.alertService.openSnackBar("Please enter the require details", "Error");
+      }
     }
     else {
-      this.alertService.openSnackBar("Please enter the require details", "Error");
+      this.onOrderActionChange(form, event, actionType);
     }
   }
 
   getOrderBook() {
+    this.uiService.showProgressBar();
     this.currencyTradingService.getOrderBook<OrderBook[]>().subscribe(
       result => {
+        this.uiService.hideProgressBar();
         this.orderBookList = result;
         this.dataSource.data = result;
+        this.alertService.openSnackBar("Last orders loaded", "Done");
       },
       error => {
         this.alertService.openSnackBar("Unable to load the Orders", "Error");
@@ -85,24 +97,26 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
     );
   }
 
-  onOrderActionChange(event: any) {
-    if (event.target.innerText == "Buy") {
-      this.orderBook.orderAction = "Buy";
-      this.totalAmount = (Number(this.orderBook.position) - Number(this.orderBook.currencyRate)) * Number(this.orderBook.unit);
-      if (this.totalAmount >= 0) {
-        this.isProfit = true;
-        this.orderBook.endAction = "Profit";
+  onOrderActionChange(form: NgForm, event: any, actionType: any) {
+    if (actionType == "orderType") {
+      if (event.target.innerText == "Buy") {
+        this.orderBook.orderAction = "Buy";
+        this.totalAmount = (Number(this.orderBook.position) - Number(this.orderBook.currentRate)) * Number(this.orderBook.unit);
+        if (this.totalAmount >= 0) {
+          this.isProfit = true;
+          this.orderBook.endAction = "Profit";
+        }
+        else {
+          this.isProfit = false;
+          this.totalAmount = -this.totalAmount;
+          this.orderBook.endAction = "Loss";
+        }
+
+        this.orderBook.totalAmount = String(this.totalAmount);
       }
       else {
-        this.isProfit = false;
-        this.totalAmount = -this.totalAmount;
-        this.orderBook.endAction = "Loss";
+        this.orderBook.orderAction = "Sell";
       }
-
-      this.orderBook.totalAmount = String(this.totalAmount);
-    }
-    else {
-      this.orderBook.orderAction = "Sell";
     }
   }
 

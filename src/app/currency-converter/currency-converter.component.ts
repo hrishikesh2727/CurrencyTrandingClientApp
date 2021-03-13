@@ -32,17 +32,22 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
   }
 
   getAllCurrency() {
+    this.uiService.showProgressBar();
     this.currencyTradingService.getAllCurrency<Currency[]>().subscribe(
       result => {
         this.lCurrency = new Currency();
         this.lCurrency.currencyCode="USD";
         this.lCurrency.currencyDescription="American USD";
-        this.lCurrency.currencyName="USD";
+        this.lCurrency.currencyName="USD - American Doller";
         this.lCurrency.currencyRate=1.19125;
         let cList : Currency[] = [];
         cList.push(this.lCurrency);
         this.currencylist = cList;
+        for( let currency of result){
+          currency.currencyName = currency.currencyName + "-"+currency.currencyDescription;
+        }
         this.liveCurrencylist = result;
+        this.uiService.hideProgressBar();
       },
       error => {
         this.alertService.openSnackBar("Data is not present", "Error");
