@@ -90,6 +90,7 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
         this.uiService.hideProgressBar();
         this.orderBookList = result;
         this.dataSource.data = result;
+        this.dataSource = new MatTableDataSource<OrderBook>(result);
         this.alertService.openSnackBar("Last orders loaded", "Done");
       },
       error => {
