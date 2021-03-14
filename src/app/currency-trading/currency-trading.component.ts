@@ -45,8 +45,8 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
   getAllCurrency() {
     this.currencyTradingService.getAllCurrency<Currency[]>().subscribe(
       result => {
-        for( let currency of result){
-          currency.currencyName = currency.currencyName + "-"+currency.currencyDescription;
+        for (let currency of result) {
+          currency.currencyName = currency.currencyName + "-" + currency.currencyDescription;
         }
         this.currencylist = result;
       },
@@ -113,7 +113,7 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
           this.orderBook.endAction = "Loss";
         }
 
-        this.orderBook.totalAmount = String(this.totalAmount);
+        this.orderBook.totalAmount = String(this.totalAmount.toFixed(2));
       }
       else {
         this.orderBook.orderAction = "Sell";
@@ -121,11 +121,11 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
 
-  onForexSelectionChanged(event:any){    
-    if(this.currencylist.filter(s=>s.currencyDescription == event.value).length > 0){
-      let rate = this.currencylist.filter(s=>s.currencyDescription == event.value)[0];
+  onForexSelectionChanged(event: any) {
+    if (this.currencylist.filter(s => s.currencyDescription == event.value).length > 0) {
+      let rate = this.currencylist.filter(s => s.currencyDescription == event.value)[0];
       this.orderBook.currentRate = String(rate.currencyRate);
-    }    
+    }
   }
 
   ngOnDestroy() {
