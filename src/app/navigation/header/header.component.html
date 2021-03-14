@@ -10,7 +10,7 @@
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
       <li *ngIf="isAuth">
-        <a routerLink="/currency-converter">Currency Converter</a>
+        <a routerLink="/currency-converter">Converter</a>
       </li>
       <li *ngIf="!isAuth">
         <a routerLink="/signup">Signup</a>
@@ -19,13 +19,13 @@
         <a routerLink="/login">Login</a>
       </li>
       <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Trading</a>
+        <a routerLink="/currency-trading">Trading</a>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Portfolio</a>
       </li>
       <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Order Book</a>
+        <a routerLink="/currency-trading">Order Book</a>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Watch List</a>
