@@ -27,6 +27,14 @@ export class EndpointBase {
     return { headers };
   }
 
+  protected get requestHeadersForCors(): { headers: HttpHeaders | { [header: string]: string | string[]; } } {
+    const headers = new HttpHeaders({
+
+    });
+    headers.append('Access-Control-Allow-Origin', '*');
+    return { headers };
+  }
+
   protected get loginRequestHeaders(): { headers: HttpHeaders | { [header: string]: string | string[]; } } {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

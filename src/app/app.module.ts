@@ -30,6 +30,7 @@ import { CompareChartComponent } from './compare-chart/compare-chart.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { UiService } from './services/ui.service';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
+import { MarketWatchComponent } from './market-watch/market-watch.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { CurrencyConverterComponent } from './currency-converter/currency-conver
     ExchangeChartComponent,
     CompareChartComponent,
     ResetPasswordComponent,
-    CurrencyConverterComponent
+    CurrencyConverterComponent,
+    MarketWatchComponent
   ],
   imports: [
     HttpClientModule,
