@@ -21,7 +21,6 @@ export class OrderBook {
      public currencyName: string;
      public currentRate: string;
      public position: string;
-     public currencyRate:string;
      public unit: string;
      public totalAmount:string;
      public orderAction: string;

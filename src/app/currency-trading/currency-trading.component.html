@@ -5,7 +5,8 @@
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
                 <mat-form-field appearance="fill">
                     <mat-label>Forex</mat-label>
-                    <mat-select ngModel name="currency" [(ngModel)]="orderBook.currencyName" required>
+                    <mat-select ngModel name="currency" [(ngModel)]="orderBook.currencyName" required
+                        (selectionChange)="onForexSelectionChanged($event)">
                         <mat-option *ngFor="let currency of currencylist" [value]="currency.currencyDescription">
                             {{currency.currencyName}}</mat-option>
                     </mat-select>
@@ -19,8 +20,8 @@
                         [(ngModel)]="orderBook.position" type="number" min="0" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input type="text" matInput placeholder="Unit" type="number" min="0" ngModel name="unit" [(ngModel)]="orderBook.unit"
-                        required>
+                    <input type="text" matInput placeholder="Unit" type="number" min="0" ngModel name="unit"
+                        [(ngModel)]="orderBook.unit" required>
                 </mat-form-field>
 
                 <mat-form-field>
@@ -43,7 +44,7 @@
             <div fxLayout="center" fxLayoutAlign="center center">
                 <div class="font-weight-bold"
                     [ngClass]="{'text-success': isProfit == true,'text-danger': isProfit == false }"> (Currenct Rate -
-                    Postion) * Unit = {{totalAmount}} </div>
+                    Postion) * Unit = {{totalAmount | number : '1.2-2'}} </div>
             </div>
             <br />
             <mat-card-actions fxLayout="center" fxLayoutAlign="center center">

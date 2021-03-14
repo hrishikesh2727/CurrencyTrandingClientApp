@@ -1,40 +1,31 @@
 <section>
   <mat-card>
-      <form #f="ngForm">
-          <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-              <mat-form-field appearance="fill">
-                  <mat-label>Select Currency Exchange</mat-label>
-                  <mat-select (selectionChange)="onCurrencySelection($event.value)">
-                    <mat-option value="1">Option 1</mat-option>
-                    <mat-option value="2">Option 2</mat-option>
-                    <mat-option value="3">Option 3</mat-option>
-                  </mat-select>
-                  <!-- <mat-select ngModel name="currency"
+    <form #f="ngForm">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <mat-form-field appearance="fill">
+          <mat-label>Select Currency Exchange</mat-label>
+          <mat-select (selectionChange)="onCurrencySelection($event.value)">
+            <mat-option value="1">Option 1</mat-option>
+            <mat-option value="2">Option 2</mat-option>
+            <mat-option value="3">Option 3</mat-option>
+          </mat-select>
+          <!-- <mat-select ngModel name="currency"
                   (selectionChange)="onCurrencySelection($event.value)"
                    required>
                       <mat-option *ngFor="let currency of currencylist"
                       [value]="currency.currencyDescription">
                           {{currency.currencyName}}</mat-option>
                   </mat-select> -->
-              </mat-form-field>
-          </div>
-          <br />
-      </form>
+        </mat-form-field>
+      </div>
+      <br />
+    </form>
   </mat-card>
 </section>
 <section>
   <mat-card>
-    <google-chart #chart
-   [title]="title"
-   [data]="data"
-   [type]="typeNm"
-   [columns]="columnNames"
-   [options]="options"
-   [width]="width"
-   [height]="height">
+    <google-chart #chart [title]="title" [data]="data" [type]="typeNm" [columns]="columnNames" [options]="options"
+      [width]="width" [height]="height">
     </google-chart>
   </mat-card>
 </section>
-
-
-
