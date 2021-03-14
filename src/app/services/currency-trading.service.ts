@@ -9,19 +9,23 @@ export class CurrencyTradingService {
 
   constructor(private currencyTradingEndpointService: CurrencyTradingEndpointService) { }
 
-  getAllCurrency<T>() {    
+  getAllCurrency<T>() {
     return this.currencyTradingEndpointService.getAllCurrencyEndpoint<T>();
   }
 
-  getLiveAllCurrency<T>() {    
+  getLiveAllCurrency<T>() {
     return this.currencyTradingEndpointService.getLiveAllCurrencyEndpoint<T>();
   }
 
-  addOrderBook<T>(orderBook: OrderBook) {    
+  addOrderBook<T>(orderBook: OrderBook) {
     return this.currencyTradingEndpointService.addOrderBookEndpoint<T>(orderBook);
-  }  
+  }
 
-  getOrderBook<T>() {    
+  getCurrencyRate<T>(currencyName: string) {
+    return this.currencyTradingEndpointService.getLiveCurrencyRateEndpoint<T>(currencyName);
+  }
+
+  getOrderBook<T>() {
     return this.currencyTradingEndpointService.getOrderBookEndpoint<T>();
-  } 
+  }
 }

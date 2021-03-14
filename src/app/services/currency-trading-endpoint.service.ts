@@ -21,35 +21,43 @@ export class CurrencyTradingEndpointService extends EndpointBase {
   get addOrderBookUrl() { return this.configurations.baseUrl + this._addOrderBookUrl; }
   get getOrderBookUrl() { return this.configurations.baseUrl + this._getOrderBookUrl; }
 
-  constructor(private configurations: ConfigurationService, http: HttpClient, authService: AuthService) { 
+  constructor(private configurations: ConfigurationService, http: HttpClient, authService: AuthService) {
     super(http, authService);
   }
-  
-  getAllCurrencyEndpoint<T>(): Observable<T> { 
+
+  getAllCurrencyEndpoint<T>(): Observable<T> {
     return this.http.get<T>(this.getAllCurrencyUrl, this.requestHeaders).pipe<T>(
       catchError(error => {
-        return this.handleError(error, () => this.getAllCurrencyEndpoint());        
+        return this.handleError(error, () => this.getAllCurrencyEndpoint());
       }));
   }
 
-  getLiveAllCurrencyEndpoint<T>(): Observable<T> { 
+  getLiveAllCurrencyEndpoint<T>(): Observable<T> {
     return this.http.get<T>(this._getLiveAllCurrencyUrl).pipe<T>(
       catchError(error => {
-        return this.handleError(error, () => this.getLiveAllCurrencyEndpoint());        
+        return this.handleError(error, () => this.getLiveAllCurrencyEndpoint());
       }));
   }
 
-  addOrderBookEndpoint<T>(orderBook: OrderBook): Observable<T> { 
+  addOrderBookEndpoint<T>(orderBook: OrderBook): Observable<T> {
     return this.http.post<T>(this.addOrderBookUrl,JSON.stringify(orderBook), this.requestHeaders).pipe<T>(
       catchError(error => {
-        return this.handleError(error, () => this.addOrderBookEndpoint(orderBook));        
+        return this.handleError(error, () => this.addOrderBookEndpoint(orderBook));
       }));
   }
 
-  getOrderBookEndpoint<T>(): Observable<T> { 
+  getOrderBookEndpoint<T>(): Observable<T> {
     return this.http.get<T>(this.getOrderBookUrl, this.requestHeaders).pipe<T>(
       catchError(error => {
-        return this.handleError(error, () => this.getOrderBookEndpoint());        
+        return this.handleError(error, () => this.getOrderBookEndpoint());
+      }));
+  }
+
+  getLiveCurrencyRateEndpoint<T>(CName: string): Observable<T> {
+    return this.http.get<T>("https://www.freeforexapi.com/api/live?pairs=" + CName).pipe<T>(
+      catchError(error => {
+        console.warn(error);
+        return this.handleError(error, () => this.getLiveCurrencyRateEndpoint(CName));
       }));
   }
 
