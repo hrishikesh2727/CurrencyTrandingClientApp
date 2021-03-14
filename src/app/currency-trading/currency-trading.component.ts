@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { UiService } from '../services/ui.service';
 import { Subscription } from 'rxjs';
+import { numbers } from '@material/snackbar';
 
 @Component({
   selector: 'app-currency-trading',
@@ -118,6 +119,13 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
         this.orderBook.orderAction = "Sell";
       }
     }
+  }
+
+  onForexSelectionChanged(event:any){    
+    if(this.currencylist.filter(s=>s.currencyDescription == event.value).length > 0){
+      let rate = this.currencylist.filter(s=>s.currencyDescription == event.value)[0];
+      this.orderBook.currentRate = String(rate.currencyRate);
+    }    
   }
 
   ngOnDestroy() {
