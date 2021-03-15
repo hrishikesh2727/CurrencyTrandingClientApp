@@ -15,26 +15,36 @@
       <li *ngIf="!isAuth">
         <a routerLink="/signup">Signup</a>
       </li>
+      <li>
+        <span>|</span>
+      </li>
       <li *ngIf="!isAuth">
         <a routerLink="/login">Login</a>
       </li>
       <li *ngIf="isAuth">
         <a routerLink="/currency-trading">Trading</a>
+        <span> |</span>
       </li>
+      
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Portfolio</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a routerLink="/order-book">Order Book</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Watch List</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Reports</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Charts</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Logout</a>
