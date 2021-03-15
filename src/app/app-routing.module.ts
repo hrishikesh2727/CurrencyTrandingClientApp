@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'currency-converter', component: CurrencyConverterComponent, canActivate: [AuthGuard] },
   { path: 'exchange-Chart', component: ExchangeChartComponent,canActivate: [AuthGuard]  },
   { path: 'compare-Chart', component: CompareChartComponent,canActivate: [AuthGuard]  },
-  { path: 'Market-Watch', component: MarketWatchComponent },
+  { path: 'Market-Watch', component: MarketWatchComponent,canActivate: [AuthGuard] },
   { path: 'order-book', component: OrderBookComponent ,canActivate: [AuthGuard] },
   
 ];
