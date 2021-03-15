@@ -22,7 +22,7 @@ table {
 }
 
 .mat-row:nth-child(even){
-  background-color: rgb(55, 0, 255);
+  background-color: rgb(138, 112, 231);
 }
       
 .mat-row:nth-child(odd){
