@@ -10,6 +10,7 @@ import { CurrencyTradingComponent } from './currency-trading/currency-trading.co
 import { ExchangeChartComponent } from './exchange-chart/exchange-chart.component'
 import { CompareChartComponent } from './compare-chart/compare-chart.component';
 import { MarketWatchComponent } from './market-watch/market-watch.component';
+import { OrderBookComponent } from './order-book/order-book.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -20,7 +21,9 @@ const routes: Routes = [
   { path: 'currency-converter', component: CurrencyConverterComponent, canActivate: [AuthGuard] },
   { path: 'exchange-Chart', component: ExchangeChartComponent,canActivate: [AuthGuard]  },
   { path: 'compare-Chart', component: CompareChartComponent,canActivate: [AuthGuard]  },
-  { path: 'Market-Watch', component: MarketWatchComponent }
+  { path: 'Market-Watch', component: MarketWatchComponent },
+  { path: 'order-book', component: OrderBookComponent ,canActivate: [AuthGuard] },
+  
 ];
 
 @NgModule({

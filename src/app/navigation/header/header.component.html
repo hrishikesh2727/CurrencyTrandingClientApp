@@ -10,31 +10,41 @@
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
       <li *ngIf="isAuth">
-        <a routerLink="/currency-converter">Currency Converter</a>
+        <a routerLink="/currency-converter">Converter</a>
       </li>
       <li *ngIf="!isAuth">
         <a routerLink="/signup">Signup</a>
+      </li>
+      <li>
+        <span>|</span>
       </li>
       <li *ngIf="!isAuth">
         <a routerLink="/login">Login</a>
       </li>
       <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Trading</a>
+        <a routerLink="/currency-trading">Trading</a>
+        <span> |</span>
       </li>
+      
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Portfolio</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Order Book</a>
+        <a routerLink="/order-book">Order Book</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Watch List</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Reports</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Charts</a>
+        <span> |</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Logout</a>

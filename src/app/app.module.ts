@@ -31,6 +31,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { UiService } from './services/ui.service';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 import { MarketWatchComponent } from './market-watch/market-watch.component';
+import { OrderBookComponent } from './order-book/order-book.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { MarketWatchComponent } from './market-watch/market-watch.component';
     CompareChartComponent,
     ResetPasswordComponent,
     CurrencyConverterComponent,
-    MarketWatchComponent
+    MarketWatchComponent,
+    OrderBookComponent
   ],
   imports: [
     HttpClientModule,

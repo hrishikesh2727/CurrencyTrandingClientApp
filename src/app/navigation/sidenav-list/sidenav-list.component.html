@@ -9,21 +9,34 @@
   </a>
   <a mat-list-item routerLink="/currency-converter" (click)="onClose()" *ngIf="isAuth">
     <mat-icon>attach_money</mat-icon>
-    <span class="nav-caption">Currency Converter</span>
+    <span class="nav-caption">Converter</span>
   </a>
   <a mat-list-item routerLink="/currency-trading" (click)="onClose()" *ngIf="isAuth">
     <mat-icon>add_task</mat-icon>
-    <span class="nav-caption">Currency Trading</span>
+    <span class="nav-caption">Trading</span>
   </a> 
-  <a mat-list-item routerLink="/currency-converter" (click)="onClose()" *ngIf="isAuth">
-    <mat-icon>attach_money</mat-icon>
-    <span class="nav-caption">Currency Converter</span>
-  </a>
-  <a mat-list-item routerLink="/currency-trading" (click)="onClose()" *ngIf="isAuth">
+  <a mat-list-item routerLink="/order-book" (click)="onClose()" *ngIf="isAuth">
+    <mat-icon>add_shopping_cart</mat-icon>
+    <span class="nav-caption">Order Book</span>
+  </a> 
+
+  <a mat-list-item routerLink="/" (click)="onClose()" *ngIf="isAuth">
     <mat-icon>add_task</mat-icon>
-    <span class="nav-caption">Currency Trading</span>
+    <span class="nav-caption">Portfolio</span>
   </a> 
-  <mat-list-item>
+
+  <a mat-list-item routerLink="/" (click)="onClose()" *ngIf="isAuth">
+    <mat-icon>alarm_on</mat-icon>
+    <span class="nav-caption">Watch List</span>
+  </a> 
+
+  <a mat-list-item routerLink="/" (click)="onClose()" *ngIf="isAuth">
+    <mat-icon>report</mat-icon>
+    <span class="nav-caption">Reports</span>
+  </a> 
+
+
+  <!-- <mat-list-item>
     <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
       <mat-icon>eject</mat-icon>
       <span class="nav-caption">Logout</span>
@@ -35,6 +48,10 @@
       <span class="nav-caption">Trading</span>
     </button>
   </mat-list-item>
+  <a mat-list-item routerLink="/order-book" (click)="onClose()" *ngIf="isAuth">
+    <mat-icon>eject</mat-icon>
+    <span class="nav-caption">Order Book</span>
+  </a> 
   <mat-list-item>
     <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
       <mat-icon>eject</mat-icon>
@@ -72,5 +89,5 @@
   <mat-menu #Chartsmenu="matMenu">
     <button mat-menu-item>Comparison</button>
     <button mat-menu-item>Historical Chart</button>
-  </mat-menu>
+  </mat-menu> -->
 </mat-nav-list>

@@ -121,4 +121,3 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 2, symbol: 'USDEUR',date: new Date(1615727542), value: 4.0026},
   {position: 3, symbol: 'USDAUD',date: new Date(1615727542), value: 6.941},
 ];
-
