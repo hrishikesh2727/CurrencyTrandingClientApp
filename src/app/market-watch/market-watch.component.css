@@ -15,10 +15,18 @@ table {
   font-size: 13px;
 }
 
+.positive::after {
+  content: " ↑";
+}
+
 .negative {
   color: red;
   font-weight: bold;
   font-size: 13px;
+}
+
+.negative::after {
+  content: " ↓";
 }
 
 .mat-row:nth-child(even){
