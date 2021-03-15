@@ -25,26 +25,21 @@
         <a routerLink="/currency-trading">Trading</a>
         <span> |</span>
       </li>
-      
-      <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Portfolio</a>
-        <span> |</span>
-      </li>
       <li *ngIf="isAuth">
         <a routerLink="/order-book">Order Book</a>
         <span> |</span>
       </li>
       <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Watch List</a>
+        <a routerLink="/Market-Watch">Market Watch</a>
         <span> |</span>
-      </li>
-      <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Reports</a>
-        <span> |</span>
-      </li>
-      <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Charts</a>
-        <span> |</span>
+      </li>      
+      <li *ngIf="isAuth">        
+        <button mat-button [matMenuTriggerFor]="menu" style="font-size: 19px;">Chart</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/compare-Chart">Comparison</button>
+          <button mat-menu-item routerLink="/exchange-Chart">Historical Chart</button>
+        </mat-menu>
+        <span>|</span>
       </li>
       <li *ngIf="isAuth">
         <a style="cursor: pointer" (click)="onLogout()">Logout</a>

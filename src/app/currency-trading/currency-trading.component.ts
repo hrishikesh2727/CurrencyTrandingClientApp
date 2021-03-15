@@ -29,6 +29,7 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
   private loadingSubs: Subscription;
   @ViewChild(MatSort) sort: MatSort;
   isVisible:boolean;
+  currentHolding:number = 0;
 
   constructor(private currencyTradingService: CurrencyTradingService, private alertService: AlertService, private uiService: UiService) { }
 
@@ -120,6 +121,19 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
       }
       else {
         this.orderBook.orderAction = "Sell";
+        try{
+        if(Number(this.orderBook.position) < Number(this.orderBook.unit)){
+          this.alertService.openSnackBar("Sell unit should not be greater than current holding.", "Error");
+        }
+        else{
+          this.totalAmount = Number(this.orderBook.currentRate) * Number(this.orderBook.unit);
+        }
+        
+        }
+        catch
+        {
+
+        }
       }
     }
   }
@@ -127,7 +141,30 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
   onForexSelectionChanged(event: any) {
     if (this.currencylist.filter(s => s.currencyDescription == event.value).length > 0) {
       let rate = this.currencylist.filter(s => s.currencyDescription == event.value)[0];
-      this.orderBook.currentRate = String(rate.currencyRate);
+      //this.orderBook.currentRate = String(rate.currencyRate);
+      this.currencyTradingService.getCurrencyRate<string>("USD"+rate.currencyCode).subscribe(
+        result => {
+          this.orderBook.currentRate = Object.values(Object.values(Object.values(result)[0])[0])[0]; 
+          this.currentHolding = 0;
+          this.orderBook.position = "0";
+          for(let orderBookObj of this.orderBookList.filter(s=>s.currencyName == event.value)){
+            if(orderBookObj.orderAction === "Buy"){
+              this.currentHolding = Number(this.currentHolding) + Number(orderBookObj.unit);
+            }
+            else{
+              if(this.currentHolding > 0){
+                this.currentHolding = Number(this.currentHolding) - Number(orderBookObj.unit);
+              }
+            }
+            this.orderBook.position = String(this.currentHolding);
+          }           
+        },
+        error => {
+          
+        }
+      );
+
+
     }
   }
 

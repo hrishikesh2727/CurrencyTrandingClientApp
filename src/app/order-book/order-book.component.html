@@ -1,29 +1,27 @@
 <section>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="accent"></mat-progress-bar>
     <mat-card>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-
-            <!-- Position Column -->
+            
             <ng-container matColumnDef="currencyName">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Currency Name </th>
                 <td mat-cell *matCellDef="let element"> {{element.currencyName}} </td>
             </ng-container>
 
-            <!-- Name Column -->
+            
             <ng-container matColumnDef="currentRate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Current Rate </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Rate </th>
                 <td mat-cell *matCellDef="let element"> {{element.currentRate}} </td>
             </ng-container>
 
-            <!-- Weight Column -->
+            
             <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Current Rate </th>
                 <td mat-cell *matCellDef="let element"> {{element.position}} </td>
             </ng-container>
 
-            <!-- Symbol Column -->
+            
             <ng-container matColumnDef="unit">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit </th>
                 <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
@@ -35,8 +33,8 @@
             </ng-container>
 
             <ng-container matColumnDef="endAction">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                <td mat-cell *matCellDef="let element"> {{element.endAction}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Current Stock Value </th>
+                <td mat-cell *matCellDef="let element"> {{element.endAction | number : '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="orderAction">

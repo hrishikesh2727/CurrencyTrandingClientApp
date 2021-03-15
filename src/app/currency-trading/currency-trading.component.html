@@ -13,11 +13,11 @@
                 </mat-form-field>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Currency Rate" ngModel name="currentRate"
-                        [(ngModel)]="orderBook.currentRate" type="number" min="0" required>
+                        [(ngModel)]="orderBook.currentRate" type="number" min="0" required disabled style="font-weight: bold;">
                 </mat-form-field>
                 <mat-form-field>
-                    <input type="text" matInput placeholder="Position" ngModel name="position"
-                        [(ngModel)]="orderBook.position" type="number" min="0" *ngIf="isVisible">
+                    <input type="text" matInput placeholder="Current Holding" ngModel name="position"
+                        [(ngModel)]="orderBook.position" type="number" min="0" disabled style="font-weight: bold;">
                 </mat-form-field>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Unit" type="number" min="0" ngModel name="unit"
