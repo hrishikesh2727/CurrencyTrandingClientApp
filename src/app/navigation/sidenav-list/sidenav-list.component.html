@@ -20,74 +20,9 @@
     <span class="nav-caption">Order Book</span>
   </a> 
 
-  <a mat-list-item routerLink="/" (click)="onClose()" *ngIf="isAuth">
-    <mat-icon>add_task</mat-icon>
-    <span class="nav-caption">Portfolio</span>
-  </a> 
-
-  <a mat-list-item routerLink="/" (click)="onClose()" *ngIf="isAuth">
+  <a mat-list-item routerLink="/Market-Watch" (click)="onClose()" *ngIf="isAuth">
     <mat-icon>alarm_on</mat-icon>
     <span class="nav-caption">Watch List</span>
   </a> 
-
-  <a mat-list-item routerLink="/" (click)="onClose()" *ngIf="isAuth">
-    <mat-icon>report</mat-icon>
-    <span class="nav-caption">Reports</span>
-  </a> 
-
-
-  <!-- <mat-list-item>
-    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
-      <mat-icon>eject</mat-icon>
-      <span class="nav-caption">Logout</span>
-    </button>
-  </mat-list-item>
-  <mat-list-item>
-    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
-      <mat-icon>eject</mat-icon>
-      <span class="nav-caption">Trading</span>
-    </button>
-  </mat-list-item>
-  <a mat-list-item routerLink="/order-book" (click)="onClose()" *ngIf="isAuth">
-    <mat-icon>eject</mat-icon>
-    <span class="nav-caption">Order Book</span>
-  </a> 
-  <mat-list-item>
-    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
-      <mat-icon>eject</mat-icon>
-      <span class="nav-caption">Portfolio</span>
-    </button>
-  </mat-list-item>
-  <mat-list-item>
-    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
-      <mat-icon>eject</mat-icon>
-      <span class="nav-caption">Order Book</span>
-    </button>
-  </mat-list-item>
-  <mat-list-item>
-    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
-      <mat-icon>eject</mat-icon>
-      <span class="nav-caption">Watch List</span>
-    </button>
-  </mat-list-item>
-  <mat-list-item [matMenuTriggerFor]="menu">
-    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
-      <mat-icon>eject</mat-icon>
-      <span class="nav-caption">Reports</span>
-    </button>
-  </mat-list-item>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>Live Data</button>
-    <button mat-menu-item>Historical Data</button>
-  </mat-menu>
-  <mat-list-item [matMenuTriggerFor]="Chartsmenu">
-    <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
-      <mat-icon>eject</mat-icon>
-      <span class="nav-caption">Charts</span>
-    </button>
-  </mat-list-item>
-  <mat-menu #Chartsmenu="matMenu">
-    <button mat-menu-item>Comparison</button>
-    <button mat-menu-item>Historical Chart</button>
-  </mat-menu> -->
+    
 </mat-nav-list>
