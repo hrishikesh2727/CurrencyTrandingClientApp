@@ -1,61 +1,93 @@
-
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { ChartType, Column, Row } from 'angular-google-charts';
+import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 import { CurrencyTradingService } from '../services/currency-trading.service';
 import { AlertService } from '../services/alert.service';
 import { UiService } from '../services/ui.service';
 import { Subject, Subscription } from 'rxjs';
 import { LiveRates } from '../models/live-rates';
+import { Title } from '@angular/platform-browser';
+import { RouterLinkWithHref } from '@angular/router';
 
 /**
  * @title Table with pagination
  */
-@Component({
+ @Component({
   selector: 'market-watch',
   templateUrl: './market-watch.component.html',
   styleUrls: ['./market-watch.component.css']
 })
 export class MarketWatchComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'symbol', 'date', 'value'];
+  displayedColumns: string[] = ['position', 'symbol','date', 'value'];
 
   liverates: LiveRates = new LiveRates();
   liveratesList: LiveRates[] = [];
   rs: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   liverateStageChanged = new Subject<LiveRates>();
-  private liverateStagSubs: Subscription;
+  private liverateStagSubs : Subscription;
   dataSource = new MatTableDataSource<LiveRates>(this.liveratesList);
 
   constructor(private currencyTradingService: CurrencyTradingService, private alertService: AlertService, private uiService: UiService) { }
 
+
   ngOnInit(): void {
 
-    setInterval(() => this.retriveRates(), 2000);
 
-    this.liverateStagSubs = this.liverateStageChanged.subscribe(updatedLiveRates => {
-      this.liveratesList.push(updatedLiveRates);
-      if (this.liveratesList.length == 3) {
-        this.dataSource = new MatTableDataSource<LiveRates>(this.liveratesList);
-      }
-    });
-  }
-
-  retriveRates() {
-    this.liveratesList = [];
-    for (let pname of ELEMENT_DATA) {
-      this.getLiveRates(pname.symbol);
+    for(let pname of ELEMENT_DATA)
+    {
+        this.liverates = new LiveRates();
+        this.liverates.symbol = pname.symbol;
+        this.liverates.position = pname.position;
+        this.liverates.ratedate = new Date();
+        this.liverates.currentValue = 0;
+        this.liverates.previousValue = 0;
+        this.liveratesList.push(this.liverates);
     }
+    setInterval(() => this.retriveRates(), 500);
+
+this.liverateStagSubs = this.liverateStageChanged.subscribe(updatedLiveRates=>{
+  this.pushToArray(this.liveratesList,updatedLiveRates);
+  this.dataSource = new MatTableDataSource<LiveRates>(this.liveratesList);
+});
+
   }
 
-  getLiveRates(cname: string) {
+   pushToArray(arr, obj) {
+    const index = arr.findIndex((e) => e.symbol === obj.symbol);
+    if (index === -1) {
+      arr.push(obj);
+    } else {
+        obj.position = arr[index].position;
+        if(arr[index].currentValue != obj.currentValue)
+        {
+          obj.previousValue = arr[index].currentValue;
+        }
+        else
+        {
+          obj.previousValue = arr[index].previousValue;
+        }
+        arr[index] = obj;
+    }
+}
+
+  retriveRates()
+  {
+    //this.liveratesList = [];
+    for(let pname of ELEMENT_DATA)
+  {
+   this.getLiveRates(pname.symbol);
+  }
+}
+
+  getLiveRates(cname : string)  {
     this.currencyTradingService.getCurrencyRate<string>(cname).subscribe(
       result => {
         let vresult = Object.values(Object.values(Object.values(result)[0])[0])[0];
         let vdate = Number(Object.values(Object.values(Object.values(result)[0])[0])[1]) * 1000;
         this.liverates = new LiveRates();
         this.liverates.symbol = cname;
-        this.liverates.position = 0;
         this.liverates.ratedate = new Date(vdate);
         this.liverates.currentValue = Number(vresult);
         this.liverateStageChanged.next(this.liverates);
@@ -72,7 +104,7 @@ export class MarketWatchComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(){
     this.liverateStagSubs.unsubscribe();
   }
 }
@@ -85,8 +117,7 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, symbol: 'USDINR', date: new Date(1615727542 * 1000), value: 1.0079 },
-  { position: 2, symbol: 'USDEUR', date: new Date(1615727542), value: 4.0026 },
-  { position: 3, symbol: 'USDAUD', date: new Date(1615727542), value: 6.941 },
+  {position: 1, symbol: 'USDINR',date: new Date(1615727542*1000), value: 1.0079},
+  {position: 2, symbol: 'USDEUR',date: new Date(1615727542), value: 4.0026},
+  {position: 3, symbol: 'USDAUD',date: new Date(1615727542), value: 6.941},
 ];
-
