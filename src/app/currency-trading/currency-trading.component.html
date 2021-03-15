@@ -17,7 +17,7 @@
                 </mat-form-field>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Position" ngModel name="position"
-                        [(ngModel)]="orderBook.position" type="number" min="0" required>
+                        [(ngModel)]="orderBook.position" type="number" min="0" *ngIf="isVisible">
                 </mat-form-field>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Unit" type="number" min="0" ngModel name="unit"
@@ -43,8 +43,8 @@
             <br />
             <div fxLayout="center" fxLayoutAlign="center center">
                 <div class="font-weight-bold"
-                    [ngClass]="{'text-success': isProfit == true,'text-danger': isProfit == false }"> (Currenct Rate -
-                    Postion) * Unit = {{totalAmount | number : '1.2-2'}} </div>
+                    [ngClass]="{'text-success': isProfit == true,'text-danger': isProfit == false }"> (Currenct Rate *
+                    Unit)  = {{totalAmount | number : '1.2-2'}} </div>
             </div>
             <br />
             <mat-card-actions fxLayout="center" fxLayoutAlign="center center">

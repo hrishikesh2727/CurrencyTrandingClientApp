@@ -22,11 +22,13 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
   totalAmount: number = 0;
   isProfit: boolean;
   orderBookList: OrderBook[];
-  displayedColumns = ['currencyName', 'currentRate', 'position', 'unit', 'totalAmount', 'endAction', 'orderAction'];
+  //displayedColumns = ['currencyName', 'currentRate', 'position', 'unit', 'totalAmount', 'endAction', 'orderAction'];
+  displayedColumns = ['currencyName', 'currentRate', 'unit', 'totalAmount', 'endAction', 'orderAction'];
   dataSource = new MatTableDataSource<OrderBook>();
   isLoading: boolean;
   private loadingSubs: Subscription;
   @ViewChild(MatSort) sort: MatSort;
+  isVisible:boolean;
 
   constructor(private currencyTradingService: CurrencyTradingService, private alertService: AlertService, private uiService: UiService) { }
 
@@ -46,7 +48,7 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
     this.currencyTradingService.getAllCurrency<Currency[]>().subscribe(
       result => {
         for (let currency of result) {
-          currency.currencyName = currency.currencyName + "-" + currency.currencyDescription;
+          currency.currencyName = "USD/"+currency.currencyName + "-" + currency.currencyDescription;
         }
         this.currencylist = result;
       },
@@ -103,7 +105,7 @@ export class CurrencyTradingComponent implements OnInit, AfterViewInit, OnDestro
     if (actionType == "orderType") {
       if (event.target.innerText == "Buy") {
         this.orderBook.orderAction = "Buy";
-        this.totalAmount = (Number(this.orderBook.position) - Number(this.orderBook.currentRate)) * Number(this.orderBook.unit);
+        this.totalAmount = Number(this.orderBook.currentRate) * Number(this.orderBook.unit);
         if (this.totalAmount >= 0) {
           this.isProfit = true;
           this.orderBook.endAction = "Profit";

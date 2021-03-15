@@ -38,7 +38,7 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
         this.lCurrency = new Currency();
         this.lCurrency.currencyCode="USD";
         this.lCurrency.currencyDescription="American USD";
-        this.lCurrency.currencyName="USD - American Doller";
+        this.lCurrency.currencyName="USD - American Dollar";
         this.lCurrency.currencyRate=1.19125;
         let cList : Currency[] = [];
         cList.push(this.lCurrency);
