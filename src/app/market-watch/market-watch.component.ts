@@ -1,4 +1,4 @@
-
+import { ChartType, Column, Row } from 'angular-google-charts';
 import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
@@ -7,6 +7,8 @@ import { AlertService } from '../services/alert.service';
 import { UiService } from '../services/ui.service';
 import { Subject, Subscription } from 'rxjs';
 import { LiveRates } from '../models/live-rates';
+import { Title } from '@angular/platform-browser';
+import { RouterLinkWithHref } from '@angular/router';
 
 /**
  * @title Table with pagination
@@ -29,22 +31,50 @@ export class MarketWatchComponent implements AfterViewInit {
 
   constructor(private currencyTradingService: CurrencyTradingService, private alertService: AlertService, private uiService: UiService) { }
 
+
   ngOnInit(): void {
 
-    setInterval(() => this.retriveRates(), 2000);
+
+    for(let pname of ELEMENT_DATA)
+    {
+        this.liverates = new LiveRates();
+        this.liverates.symbol = pname.symbol;
+        this.liverates.position = pname.position;
+        this.liverates.ratedate = new Date();
+        this.liverates.currentValue = 0;
+        this.liverates.previousValue = 0;
+        this.liveratesList.push(this.liverates);
+    }
+    setInterval(() => this.retriveRates(), 500);
 
 this.liverateStagSubs = this.liverateStageChanged.subscribe(updatedLiveRates=>{
-  this.liveratesList.push(updatedLiveRates);
-  if(this.liveratesList.length == 3)
-  {
+  this.pushToArray(this.liveratesList,updatedLiveRates);
   this.dataSource = new MatTableDataSource<LiveRates>(this.liveratesList);
-  }
 });
+
   }
+
+   pushToArray(arr, obj) {
+    const index = arr.findIndex((e) => e.symbol === obj.symbol);
+    if (index === -1) {
+      arr.push(obj);
+    } else {
+        obj.position = arr[index].position;
+        if(arr[index].currentValue != obj.currentValue)
+        {
+          obj.previousValue = arr[index].currentValue;
+        }
+        else
+        {
+          obj.previousValue = arr[index].previousValue;
+        }
+        arr[index] = obj;
+    }
+}
 
   retriveRates()
   {
-    this.liveratesList = [];
+    //this.liveratesList = [];
     for(let pname of ELEMENT_DATA)
   {
    this.getLiveRates(pname.symbol);
@@ -58,7 +88,6 @@ this.liverateStagSubs = this.liverateStageChanged.subscribe(updatedLiveRates=>{
         let vdate = Number(Object.values(Object.values(Object.values(result)[0])[0])[1]) * 1000;
         this.liverates = new LiveRates();
         this.liverates.symbol = cname;
-        this.liverates.position = 0;
         this.liverates.ratedate = new Date(vdate);
         this.liverates.currentValue = Number(vresult);
         this.liverateStageChanged.next(this.liverates);
