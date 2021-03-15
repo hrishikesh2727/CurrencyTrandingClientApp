@@ -53,6 +53,6 @@ export class AuthService {
 
   private authSuccessfully() {
     this.authChange.next(true);
-    this.router.navigate(['/currency-converter']);
+    this.router.navigate(['/']);
   }
 }
